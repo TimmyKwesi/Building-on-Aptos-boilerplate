@@ -1,6 +1,7 @@
 [package]
-name = 'calculator_l12'
-version = '1.0.0'
+name = 'calculator_l13'
+version = '1.1.0'
+upgrade_policy = "compatible"
 
 [dependencies]
 AptosFramework = { git = "https://github.com/aptos-labs/aptos-core.git", subdir = "aptos-move/framework/aptos-framework", rev = "testnet" }
