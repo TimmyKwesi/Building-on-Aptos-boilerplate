@@ -16,12 +16,26 @@ import {
 import { WalletSelector } from "@aptos-labs/wallet-adapter-ant-design";
 import "@aptos-labs/wallet-adapter-ant-design/dist/index.css";
 import styled from "styled-components";
+import metaschoolLogo from "./Assets/Metaschool Logo Black.png";
 
 const aptosConfig = new AptosConfig({ network: Network.TESTNET });
 const client = new Aptos(aptosConfig);
 
 const moduleName = process.env.REACT_APP_MODULE_NAME;
 const moduleAddress = process.env.REACT_APP_MODULE_ADDRESS;
+
+const Footer = styled.footer`
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  text-align: center;
+  padding: 10px 0;
+  background-color: #f1f1f1;
+`;
+
+const FooterLogo = styled.img`
+  height: 16px;
+`;
 
 const WindowWrapper = styled.div`
   display: flex;
@@ -196,8 +210,7 @@ const App: React.FC = () => {
         });
 
         console.log(resultData);
-        const decodedResult = hexToString(resultData.result.toString());
-        setResult(decodedResult.substring(1, decodedResult.length));
+        setResult(resultData.result.toString());
       } catch (error) {
         console.error(error);
       } finally {
@@ -223,14 +236,6 @@ const App: React.FC = () => {
       const response = await signAndSubmitTransaction(payload);
       console.log(response);
     }
-  };
-
-  const hexToString = (hex: string) => {
-    let string = "";
-    for (let i = 0; i < hex.length; i += 2) {
-      string += String.fromCharCode(parseInt(hex.substr(i, 2), 16));
-    }
-    return string;
   };
 
   const connectedView = () => {
@@ -362,6 +367,9 @@ const App: React.FC = () => {
         <WalletSelector />
       </WalletWrapper>
       {connected ? connectedView() : notConnectedView()}
+      <Footer>
+        <FooterLogo src={metaschoolLogo} alt="Metaschool Logo" />
+      </Footer>
     </WindowWrapper>
   );
 };
